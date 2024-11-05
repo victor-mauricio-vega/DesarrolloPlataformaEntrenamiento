@@ -1,0 +1,20 @@
+{
+  "name": "plataforma_entrenamiento",
+  "version": "1.0.0",
+  "description": "Platform Web to manage the users, plans and courses of Learning in Esri.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://fesrinosa@dev.azure.com/fesrinosa/Plataforma%20Entrenamiento/_git/Plataforma%20Entrenamiento"
+  },
+  "author": "Geogeeks-Semillero Esri Colombia",
+  "license": "MIT",
+  "workspaces": [
+    "Plataforma%20Entrenamiento/*"
+  ],
+  "devDependencies": {
+    "turbo": "^2.2.3"
+  }
+}
