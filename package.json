@@ -1,6 +1,7 @@
 {
   "name": "plataforma_entrenamiento",
   "version": "1.0.0",
+  "private": true,
   "description": "Platform Web to manage the users, plans and courses of Learning in Esri.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,9 +13,7 @@
   "author": "Geogeeks-Semillero Esri Colombia",
   "license": "MIT",
   "workspaces": [
-    "Plataforma%20Entrenamiento/*"
-  ],
-  "devDependencies": {
-    "turbo": "^2.2.3"
-  }
+    "api",
+    "client"
+  ]
 }
