@@ -9,9 +9,36 @@ import { SurveysModule } from './surveys/surveys.module';
 import { PlacesModule } from './places/places.module';
 import { AuthModule } from './auth/auth.module';
 import { DatabasesModule } from './databases/databases.module';
+import { ConfigModule } from '@nestjs/config';
+import { environments } from './environments';
+import config from './config';
+import Joi from 'joi';
 
 @Module({
-  imports: [CertificatesModule, CompaniesModule, UsersModule, ClassesModule, SurveysModule, PlacesModule, AuthModule, DatabasesModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: environments[process.env.NODE_ENV] || '.dev.env',
+      load: [config],
+      isGlobal: true,
+      validationSchema: Joi.object({
+        SQL_SERVER: Joi.string().required(),
+        SQL_DATABASE: Joi.string().required(),
+        SQL_USER: Joi.string().required(),
+        SQL_PASSWORD: Joi.string().required(),
+        SQL_PORT: Joi.number().required(),
+        RUTA_MATERIAL: Joi.string().required(),
+        HOST_MATERIAL: Joi.string().required(),
+      }),
+    }),
+    CertificatesModule,
+    CompaniesModule,
+    UsersModule,
+    ClassesModule,
+    SurveysModule,
+    PlacesModule,
+    AuthModule,
+    DatabasesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
