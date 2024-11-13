@@ -8,9 +8,10 @@ import { GroupService } from './services/group/group.service';
 import { GroupTypeService } from './services/group_type/group_type.service';
 import { ClasseService } from './services/classe/classe.service';
 import { CourseService } from './services/course/course.service';
+import { ScheduleService } from './services/schedule/schedule.service';
 
 @Module({
   controllers: [GroupController, ClasseController, GroupTypeController, CourseController, ScheduleController],
-  providers: [GroupService, GroupTypeService, ClasseService, CourseService]
+  providers: [GroupService, GroupTypeService, ClasseService, CourseService, ScheduleService]
 })
 export class ClassesModule {}
