@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { CertificateController } from './controllers/certificate/certificate.controller';
 
-@Module({})
+@Module({
+  controllers: [CertificateController]
+})
 export class CertificatesModule {}
