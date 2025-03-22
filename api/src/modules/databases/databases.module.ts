@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import config from 'src/config';
+import config from 'src/config/config';
 import { View_Clases_Estudiantes } from 'src/users/views/clases_estudiantes.view';
 
 @Module({

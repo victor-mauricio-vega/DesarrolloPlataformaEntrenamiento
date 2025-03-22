@@ -10,8 +10,8 @@ import { PlacesModule } from './places/places.module';
 import { AuthModule } from './auth/auth.module';
 import { DatabasesModule } from './databases/databases.module';
 import { ConfigModule } from '@nestjs/config';
-import { environments } from './environments';
-import config from './config';
+import { environments } from './config/environments';
+import config from './config/config';
 import Joi from 'joi';
 
 @Module({
