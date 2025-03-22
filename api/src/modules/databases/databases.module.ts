@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+/* import { Module } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import config from 'src/config/config';
@@ -33,3 +33,4 @@ import { View_Clases_Estudiantes } from 'src/users/views/clases_estudiantes.view
       exports: [TypeOrmModule],
 })
 export class DatabasesModule {}
+ */

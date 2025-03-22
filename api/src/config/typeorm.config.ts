@@ -1,7 +1,7 @@
 import { DataSourceOptions } from 'typeorm';
 import { config as dotenvConfig } from 'dotenv';
 
-dotenvConfig({ path: `.env.${process.env.NODE_ENV || 'dev'}` });
+dotenvConfig({ path: `env/.env.${process.env.NODE_ENV || 'dev'}` });
 
 const config: DataSourceOptions = {
   type: 'mssql',

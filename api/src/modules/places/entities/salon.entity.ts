@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { Grupo } from './grupo.entity';
+import { Grupo } from '../../classes/entities/grupo.entity';
 import { Ubicacion } from './ubicacion.entity';
 
 @Entity()

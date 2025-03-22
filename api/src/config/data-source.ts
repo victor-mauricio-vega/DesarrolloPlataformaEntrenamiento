@@ -5,7 +5,7 @@ import { DataSourceOptions } from 'typeorm';
 import config from './typeorm.config';
 
 // Carga el archivo correcto según NODE_ENV
-dotenvConfig({ path: `.env.${process.env.NODE_ENV || 'dev'}` });
+dotenvConfig({ path: `env/.${process.env.NODE_ENV || 'dev'}.env` });
 // Obtiene la configuración exportada
 const dbConfig = databaseConfig() as DataSourceOptions;
 

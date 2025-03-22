@@ -8,17 +8,16 @@ import { ClassesModule } from './modules/classes/classes.module';
 import { SurveysModule } from './modules/surveys/surveys.module';
 import { PlacesModule } from './modules/places/places.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { DatabasesModule } from './modules/databases/databases.module';
 import { ConfigModule } from '@nestjs/config';
 import { environments } from './config/environments';
 import config from './config/config';
-import Joi from 'joi';
+import * as Joi from 'joi'; 
 import databaseConfig from './config/database.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: environments[process.env.NODE_ENV] || '.env',
+      envFilePath: `env/.${process.env.NODE_ENV}.env` || '.env',
       load: [config, databaseConfig],
       isGlobal: true,
       validationSchema: Joi.object({
@@ -38,7 +37,6 @@ import databaseConfig from './config/database.config';
     SurveysModule,
     PlacesModule,
     AuthModule,
-    DatabasesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
