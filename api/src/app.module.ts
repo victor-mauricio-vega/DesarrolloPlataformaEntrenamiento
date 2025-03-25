@@ -17,7 +17,9 @@ import databaseConfig from './config/database.config';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `env/.${process.env.NODE_ENV}.env` || '.env',
+      envFilePath: process.env.NODE_ENV
+        ? `env/.${process.env.NODE_ENV}.env`
+        : 'env/.dev.env',
       load: [config, databaseConfig],
       isGlobal: true,
       validationSchema: Joi.object({
