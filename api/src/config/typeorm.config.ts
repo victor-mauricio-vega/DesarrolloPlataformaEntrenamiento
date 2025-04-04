@@ -14,9 +14,9 @@ const config: DataSourceOptions = {
     trustServerCertificate: true,
   },
   dropSchema: false,
-  synchronize: true,
+  synchronize: false,
   entities: ['dist/**/*.entity.{ts,js}'],
-  migrations: ['dist/database/migrations/*.js'],
+  migrations: ['../modules/databases/migrations/*.js'],
 };
 
 export default config;
