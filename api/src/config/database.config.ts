@@ -1,17 +1,18 @@
 import { registerAs } from '@nestjs/config';
+import { SqlServerConnectionOptions } from 'typeorm/driver/sqlserver/SqlServerConnectionOptions';
 
-export default registerAs('database', () => ({
+export default registerAs('database', (): SqlServerConnectionOptions => ({
   type: 'mssql',
   host: process.env.SQL_SERVER,
-  database: process.env.SQL_DATABASE,
+  port: parseInt(process.env.SQL_PORT || '1433', 10),
   username: process.env.SQL_USER,
   password: process.env.SQL_PASSWORD,
-  port: parseInt(process.env.SQL_PORT, 10) || 1433,
+  database: process.env.SQL_DATABASE,
   extra: {
     trustServerCertificate: true,
+    server: process.env.SQL_SERVER,
   },
-  dropSchema: false,
-  synchronize: true,
-  entities: ['dist/**/*.entity{.ts,.js}'],
-  migrations: ['dist/database/migrations/*.js'],
+  synchronize: false,
+  entities: [__dirname + '/../modules/**/*.entity.{ts,js}'],
+  migrations: [__dirname + '/../migrations/*.{ts,js}'],
 }));

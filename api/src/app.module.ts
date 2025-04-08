@@ -8,28 +8,35 @@ import { ClassesModule } from './modules/classes/classes.module';
 import { SurveysModule } from './modules/surveys/surveys.module';
 import { PlacesModule } from './modules/places/places.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
-import { environments } from './config/environments';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import config from './config/config';
-import * as Joi from 'joi'; 
+import * as Joi from 'joi';
 import databaseConfig from './config/database.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: process.env.NODE_ENV
-        ? `env/.${process.env.NODE_ENV}.env`
-        : 'env/.dev.env',
-      load: [config, databaseConfig],
       isGlobal: true,
-      validationSchema: Joi.object({
-        SQL_SERVER: Joi.string().required(),
-        SQL_DATABASE: Joi.string().required(),
-        SQL_USER: Joi.string().required(),
-        SQL_PASSWORD: Joi.string().required(),
-        SQL_PORT: Joi.number().required(),
-        RUTA_MATERIAL: Joi.string().optional().allow(''),
-        HOST_MATERIAL: Joi.string().optional().allow(''),
+      load: [databaseConfig],
+      envFilePath: `env/.${process.env.NODE_ENV || 'dev'}.env`,
+      }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mssql',
+        server: configService.get<string>('database.host'),
+        port: configService.get<number>('database.port'),
+        username: configService.get<string>('database.username'),
+        password: configService.get<string>('database.password'),
+        database: configService.get<string>('database.database'),
+        extra: {
+          trustServerCertificate: true,         
+        },
+        synchronize: false,
+        entities: [__dirname + '/modules/**/*.entity.{ts,js}'],
+        migrations: [__dirname + '/migrations/*.{ts,js}'],
       }),
     }),
     CertificatesModule,
@@ -44,3 +51,4 @@ import databaseConfig from './config/database.config';
   providers: [AppService],
 })
 export class AppModule {}
+
