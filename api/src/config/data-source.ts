@@ -4,6 +4,7 @@ import { config as dotenvConfig } from 'dotenv';
 import { join } from 'path';
 import { Certificado } from '../modules/certificates/entities/certificado.entity';
 
+
 const envPath = join(process.cwd(), 'env', `.${process.env.NODE_ENV || 'dev'}.env`);
 console.log('🌱 Cargando archivo de entorno:', envPath);
 

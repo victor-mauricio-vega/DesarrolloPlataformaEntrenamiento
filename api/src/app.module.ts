@@ -24,7 +24,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'mssql',
-        server: configService.get<string>('database.host'),
+        host: configService.get<string>('database.host'),
         port: configService.get<number>('database.port'),
         username: configService.get<string>('database.username'),
         password: configService.get<string>('database.password'),
