@@ -17,7 +17,7 @@ export class Certificado {
 
   @Column({ type: 'date', comment: 'Fecha de expedición del certificado' })
   fecha: Date;
-
+/*
   @ManyToOne(() => Clase, (clase) => clase.grupo)
   @JoinColumn({
     name: 'fk_grupo',
@@ -33,4 +33,5 @@ export class Certificado {
     foreignKeyConstraintName: 'fk_certificado_clase',
   })
   estudiante: Estudiante;
+  */
 }
