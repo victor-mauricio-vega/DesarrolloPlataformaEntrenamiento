@@ -9,8 +9,6 @@ import { SurveysModule } from './modules/surveys/surveys.module';
 import { PlacesModule } from './modules/places/places.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import config from './config/config';
-import * as Joi from 'joi';
 import databaseConfig from './config/database.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
