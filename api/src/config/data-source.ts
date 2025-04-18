@@ -3,7 +3,12 @@ import { SqlServerConnectionOptions } from 'typeorm/driver/sqlserver/SqlServerCo
 import { config as dotenvConfig } from 'dotenv';
 import { join } from 'path';
 import { Certificado } from '../modules/certificates/entities/certificado.entity';
-
+import { TipoDocumento } from '../modules/users/entities/tipoDocumento.entity';
+import { Pais } from '../modules/places/entities/pais.entity';
+import { Usuario } from '../modules/users/entities/usuario.entity';
+import { Estudiante } from '../modules/users/entities/estudiante.entity';
+import { Clase } from '../modules/classes/entities/clase.entity';
+import { Grupo } from '../modules/classes/entities/grupo.entity';
 
 const envPath = join(process.cwd(), 'env', `.${process.env.NODE_ENV || 'dev'}.env`);
 console.log('🌱 Cargando archivo de entorno:', envPath);
@@ -24,7 +29,8 @@ const options: SqlServerConnectionOptions = {
     synchronize: false,
     dropSchema: false,
     //entities: [__dirname + '/../modules/**/*.entity.{ts,js}'],
-    entities:[Certificado],
+    //Se van agregando las entidades que se van creando
+    entities:[TipoDocumento, Pais, Usuario, Estudiante,Clase, Grupo],
     migrations: [__dirname + '/../migrations/*.{ts,js}'],
 };
 
