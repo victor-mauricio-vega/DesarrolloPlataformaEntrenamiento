@@ -3,6 +3,7 @@ import { Empresa } from './../../companies/entities/empresa.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Ubicacion } from './ubicacion.entity';
 import { Usuario } from '../../users/entities/usuario.entity';
+import { TipoDocumento } from '../../users/entities/tipoDocumento.entity';
 
 @Entity('PAIS')
 export class Pais {
@@ -14,6 +15,10 @@ export class Pais {
 
   @OneToMany(() => Usuario, usuario => usuario.pais)
   usuarios: Usuario[];
+
+  @OneToMany(() => TipoDocumento, tipoDocumento => tipoDocumento.pais)
+    tiposDocumento: TipoDocumento[];
+
   /*
   @OneToMany(() => Clase, (clase) => clase.pais_orden_venta)
   clases: Clase[];
