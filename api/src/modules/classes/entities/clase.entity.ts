@@ -1,10 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
-
 import { Estudiante } from '../../users/entities/estudiante.entity';
-import { Empresa } from '../../companies/entities/empresa.entity';
 import { Grupo } from './grupo.entity';
 
-@Entity()
+@Entity('CLASE')
 export class Clase {
   @PrimaryColumn({
     name: 'pfk_estudiante',
@@ -17,25 +15,26 @@ export class Clase {
     name: 'pfk_grupo',
     primaryKeyConstraintName: 'pk_clase',
     generated: 'increment',
-    foreignKeyConstraintName: 'fk_clase_grupo',
+    foreignKeyConstraintName: 'FK_CLASE_GRUPO',
   })
   pfk_grupo: number;
 
   @ManyToOne(() => Estudiante, (estudiante) => estudiante.clases)
-  // @JoinColumn({
-  //   name: 'pfk_estudiante',
-  //   referencedColumnName: 'pk_estudiante',
-  //   foreignKeyConstraintName: 'fk_clase_estudiante',
-  // })
+   @JoinColumn({
+     name: 'pfk_estudiante',
+     referencedColumnName: 'pk_estudiante',
+     foreignKeyConstraintName: 'fk_clase_estudiante',
+   })
   estudiante: Estudiante;
   @ManyToOne(() => Grupo, (grupo) => grupo.clases)
-  // @JoinColumn({
-  //   name: 'pfk_grupo',
-  //   referencedColumnName: 'pk_grupo',
-  //   foreignKeyConstraintName: 'fk_clase_grupo',
-  // })
+   @JoinColumn({
+     name: 'pfk_grupo',
+     referencedColumnName: 'pk_grupo',
+     foreignKeyConstraintName: 'FK_CLASE_GRUPO',
+   })
   grupo: Grupo;
-  @Column({ type: 'nvarchar', length: 50 })
+
+/*   @Column({ type: 'nvarchar', length: 50 })
   estado_encuesta: string;
   @Column({ type: 'nvarchar', length: 50 })
   estado_material: string;
@@ -48,13 +47,6 @@ export class Clase {
   @Column('numeric', { precision: 5, scale: 2, nullable: true })
   calificacion: number;
   @Column({ type: 'date', nullable: true })
-  fecha: Date;
+  fecha: Date; */
 
-  @ManyToOne(() => Empresa, (empresa) => empresa.clases)
-  @JoinColumn({
-    name: 'fk_empresa',
-    referencedColumnName: 'pk_empresa',
-    foreignKeyConstraintName: 'fk_clase_empresa',
-  })
-  empresa: Empresa;
 }

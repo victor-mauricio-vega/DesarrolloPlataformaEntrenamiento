@@ -1,33 +1,19 @@
-import { Check, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Check, Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Clase } from '../../classes/entities/clase.entity';
+import { Usuario } from '../entities/usuario.entity';
 
-@Entity()
+@Entity('ESTUDIANTE')
 export class Estudiante {
-  @PrimaryGeneratedColumn({
-    primaryKeyConstraintName: 'PK_ESTUDIANTE',
-    comment: 'Clave primaria del Estudiante',
-  })
+  @PrimaryGeneratedColumn({ name: 'PK_ESTUDIANTE', primaryKeyConstraintName: 'PK_ESTUDIANTE' })
   pk_estudiante: number;
-  @Column({
-    type: 'nvarchar',
-    length: 20,
-    comment: 'Documento de indentificacion del Estudiante',
-  })
-  @Check('CK_DOC_IDENTIDAD_ESTUDIANTE', "DOC_IDENTIDAD='0' OR (ISNUMERIC(DOC_IDENTIDAD)=1 AND LEN(DOC_IDENTIDAD)>=6 AND LEN(DOC_IDENTIDAD)<=12)")
-  doc_identidad: string;
-  @Column({ type: 'nvarchar', length: 50, comment: 'Nombre del Estudiante' })
-  nombre: string;
-  @Column({ type: 'nvarchar', length: 50, comment: 'Apellido del Estudiante' })
-  apellido: string;
-  @Column({ type: 'nvarchar', length: 100, comment: 'Correo del Estudiante' })
-  correo: string;
-  @Column({ type: 'nvarchar', length: 60, comment: 'Usuario del Estudiante' })
-  usuario: string;
-  @Column({ type: 'nvarchar', length: 50, nullable: true, comment:'Numero de contacto del Estudiante'})
-  @Check('CK_NUM_CONTACTO_ESTUDIANTE',"NUM_CONTACTO='0' OR LEN(NUM_CONTACTO)>=7")
-  num_contacto: string;
-  @Column({ type: 'bit', default: 1 })
+
+  @Column({ type: 'bit', default: () => '1', name: 'REGISTRADO' })
   registrado: boolean;
+
+  @ManyToOne(() => Usuario)
+  @JoinColumn({ name: 'FK_USUARIO', foreignKeyConstraintName: 'FK_ESTUDIANTE_USUARIO' })
+  @Index('IXFK_ESTUDIANTE_USUARIO')
+  usuario: Usuario;
 
   @OneToMany(() => Clase, (clase) => clase.estudiante)
   clases: Clase[];

@@ -18,7 +18,7 @@ export class UsuarioService {
   async create(dto: CreateUsuarioDto): Promise<Usuario> {
     const tipoDoc = await this.tipoDocumentoRepository.findOne({
       where: {
-        id: dto.tipoDocumentoId,
+        pk_tipo_documento: dto.tipoDocumentoId,
         fk_pais: dto.fkPais,
       },
       relations: ['pais'],

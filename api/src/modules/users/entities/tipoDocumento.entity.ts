@@ -3,8 +3,10 @@ import { Pais } from '../../places/entities/pais.entity';
 
 @Entity('TIPO_DOCUMENTO')
 export class TipoDocumento {
-  @PrimaryColumn({ name: 'PK_TIPO_DOCUMENTO' })
-  id: string;
+  @PrimaryColumn({ 
+    name: 'PK_TIPO_DOCUMENTO',
+    primaryKeyConstraintName: 'PK_TIPO_DOCUMENTO',})
+  pk_tipo_documento: string;
 
   @Column({ name: 'EXPRESION' })
   expresion: string;

@@ -4,8 +4,11 @@ import { TipoDocumento } from '../../users/entities/tipoDocumento.entity';
 
 @Entity('USUARIO')
 export class Usuario {
-  @PrimaryGeneratedColumn({ name: 'PK_USUARIO' })
-  id: number;
+  @PrimaryGeneratedColumn({ 
+    name: 'PK_USUARIO',
+    primaryKeyConstraintName: 'PK_USUARIO'
+   })
+  pk_usuario: number;
 
   @Column({ name: 'USUARIO', length: 60 })
   usuario: string;
@@ -20,7 +23,10 @@ export class Usuario {
   apellido: string;
 
   @ManyToOne(() => TipoDocumento, { nullable: false })
-  @JoinColumn({ name: 'TIPO_DOC', referencedColumnName: 'id' })
+  @JoinColumn({ 
+    name: 'TIPO_DOC', 
+    referencedColumnName: 'pk_tipo_documento',
+    foreignKeyConstraintName: 'FK_USUARIO_TIPO_DOCUMENTO'})
   tipoDocumento: TipoDocumento;
   
  // @Check('CK_DOCUMENTO_IDENTIDAD_USUARIO', "[DOCUMENTO_IDENTIDAD]='0' OR len([DOCUMENTO_IDENTIDAD]) >= 6 AND len([DOCUMENTO_IDENTIDAD]) <= 15")
@@ -32,6 +38,9 @@ export class Usuario {
   numContacto: string;
 
   @ManyToOne(() => Pais, pais => pais.usuarios, { nullable: false })
-  @JoinColumn({ name: 'FK_PAIS' })
+  @JoinColumn({ name: 'FK_PAIS',
+    referencedColumnName: 'pk_pais',
+    foreignKeyConstraintName: 'FK_USUARIO_PAIS',
+   })
   pais: Pais;
 }

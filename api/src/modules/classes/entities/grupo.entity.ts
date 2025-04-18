@@ -13,14 +13,16 @@ import { Clase } from './clase.entity';
 import { Curso } from './curso.entity';
 import { Horario } from './horario.entity';
 import { Salon } from '../../places/entities/salon.entity';
-// import { Tipo_Grupo } from './tipo_grupo.entity';
+import { TipoGrupo } from './tipoGrupo.entity';
 
-@Entity()
+@Entity('GRUPO')
 export class Grupo {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({name: 'PK_GRUPO', primaryKeyConstraintName: 'PK_GRUPO'})
   pk_grupo: number;
-  @Column({ type: 'date' })
+
+  /* @Column({ type: 'date' })
   fecha_inicio: Date;
+
   @Column({ type: 'date' })
   fecha_fin: Date;
   @Column({ type: 'nvarchar', length: 50, nullable: true })
@@ -58,15 +60,12 @@ export class Grupo {
 
   @OneToMany(() => Horario, (horario) => horario.grupos)
   horario: Horario;
-
+ */
   @OneToMany(() => Clase, (clase) => clase.grupo)
   clases: Clase[];
 
-  // @ManyToOne(() => Tipo_Grupo, (tipoGrupo) => tipoGrupo.grupos)
-  // @JoinColumn({
-  //   name: 'fk_tipo_grupo',
-  //   referencedColumnName: 'pk_tipo_grupo',
-  //   foreignKeyConstraintName: 'fk_tipo_grupo',
-  // })
-  // tipo: Tipo_Grupo;
+/*   @ManyToOne(() => TipoGrupo)
+  @JoinColumn({ name: 'FK_TIPO_GRUPO', foreignKeyConstraintName: 'FK_GRUPO_TIPO_GRUPO' })
+  tipoGrupo: TipoGrupo; */
+
 }
