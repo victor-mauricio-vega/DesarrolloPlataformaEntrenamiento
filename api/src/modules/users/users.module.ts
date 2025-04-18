@@ -5,8 +5,11 @@ import { AdministratorController } from './controllers/administrator/administrat
 import { StudentService } from './services/student/student.service';
 import { InstructorService } from './services/instructor/instructor.service';
 import { AdministratorService } from './services/administrator/administrator.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TipoDocumento } from './entities/tipoDocumento.entity';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([TipoDocumento])], // Add any necessary imports here
   controllers: [StudentController, InstructorController, AdministratorController],
   providers: [StudentService, InstructorService, AdministratorService]
 })
