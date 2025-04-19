@@ -44,6 +44,5 @@ export class Empresa {
   })
   sector: Sector;
 
-  @OneToMany(() => Clase, (clase) => clase.empresa)
-  clases: Clase[];
+
 }

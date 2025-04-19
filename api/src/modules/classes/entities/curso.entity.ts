@@ -1,36 +1,52 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Grupo } from './grupo.entity';
 
-@Entity()
+@Index('IXAX_SIGLA', ['sigla'], { unique: false })
+@Entity('CURSO')
 export class Curso {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    name: 'PK_CURSO',
+    primaryKeyConstraintName: 'PK_CURSO',
+  })
   pk_curso: number;
-  @Column({ type: 'nvarchar', length: 50 })
+
+  @Column({ name: 'SIGLA', type: 'nvarchar', length: 50 })
   sigla: number;
-  @Column({ type: 'nvarchar', length: 100 })
+
+  @Column({ name: 'NOMBRE', type: 'nvarchar', length: 100 })
   nombre: string;
-  @Column({ type: 'int' })
+
+  @Column({ name: 'INTENSIDAD', type: 'int' })
   intensidad: number;
-  @Column({ type: 'nvarchar', length: 50 })
-  estado: string;
-  @Column({ type: 'nvarchar', length: 50 })
-  estado_material: string;
-  @Column({ type: 'date', nullable: true })
+
+  @Column({ name: 'ESTADO', type: 'bit' }) //  convertido a booleano comparado al anterior modelo
+  estado: boolean;
+
+  @Column({ name: 'ESTADO_MATERIAL', type: 'bit' }) //  convertido a booleano comparado al anterior modelo 
+  estado_material: boolean;
+
+  @Column({ name: 'FECHA_LANZAMIENTO', type: 'date', nullable: true })
   fecha_lanzamiento: Date;
-  @Column({ type: 'nvarchar', length: 50 })
+
+  @Column({ name: 'TIPO', type: 'nvarchar', length: 50 })
   tipo: string;
-  @Column({ type: 'nvarchar', length: 50, nullable: true })
+
+  @Column({ name: 'IDIOMA', type: 'nvarchar', length: 50, nullable: true })
   idioma: string;
-  @Column({ type: 'nvarchar', length: 50, nullable: true })
+
+  @Column({ name: 'ORGANIZACION', type: 'nvarchar', length: 50, nullable: true })
   organizacion: string;
-  @Column({ type: 'nvarchar', length: 50, nullable: true })
+
+  @Column({ name: 'ACRONIMO', type: 'nvarchar', length: 50, nullable: true })
   acronimo: string;
-  @Column({ type: 'nvarchar', length: 50, nullable: true })
+
+  @Column({ name: 'VER_PLATAFORMA', type: 'nvarchar', length: 50, nullable: true })
   ver_plataforma: string;
-  @Column({ type: 'nvarchar', length: 50, nullable: true })
+
+  @Column({ name: 'VER_MATERIAL', type: 'nvarchar', length: 50, nullable: true })
   ver_material: string;
-  @Column({ type: 'nvarchar', length: 100, nullable: true })
+  
+  @Column({ name: 'CATEGORIA', type: 'nvarchar', length: 100, nullable: true })
   categoria: string;
 
   @OneToMany(() => Grupo, (grupo) => grupo.curso)

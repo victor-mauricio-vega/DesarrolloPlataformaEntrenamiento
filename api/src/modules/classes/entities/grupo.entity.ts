@@ -17,32 +17,36 @@ import { TipoGrupo } from './tipoGrupo.entity';
 
 @Entity('GRUPO')
 export class Grupo {
-  @PrimaryGeneratedColumn({name: 'PK_GRUPO', primaryKeyConstraintName: 'PK_GRUPO'})
+  @PrimaryGeneratedColumn({ name: 'PK_GRUPO', primaryKeyConstraintName: 'PK_GRUPO' })
   pk_grupo: number;
 
-  /* @Column({ type: 'date' })
+  @Column({ name: 'FECHA_INICIO', type: 'date' })
   fecha_inicio: Date;
 
-  @Column({ type: 'date' })
+  @Column({ name: 'FECHA_FIN', type: 'date' })
   fecha_fin: Date;
-  @Column({ type: 'nvarchar', length: 50, nullable: true })
+
+  @Column({ name: 'TIPO', type: 'nvarchar', length: 50, nullable: true })
   tipo: string;
-  @Column({ type: 'nvarchar', length: 50, nullable: true })
+
+  @Column({ name: 'ALCANCE', type: 'nvarchar', length: 50, nullable: true })
   alcance: string;
-  @Column({ type: 'bit', nullable: true })
+
+  @Column({ name: 'ENTREGA_MODIFICADA', type: 'bit', nullable: true })
   entrega_modificada: boolean;
-  @Column({ type: 'nvarchar', length: 'max', nullable: true })
+
+  @Column({ name: 'INFORME', type: 'nvarchar', length: 'max', nullable: true })
   informe: string;
 
   @ManyToOne(() => Curso, (curso) => curso.grupos)
   @JoinColumn({
-    name: 'fk_curso',
+    name: 'FK_CURSO',
     referencedColumnName: 'pk_curso',
-    foreignKeyConstraintName: 'fk_grupo_curso',
+    foreignKeyConstraintName: 'FK_GRUPO_CURSO',
   })
   curso: Curso;
 
-  @ManyToOne(() => Salon, (salon) => salon.grupos)
+  /* @ManyToOne(() => Salon, (salon) => salon.grupos)
   @JoinColumn({
     name: 'fk_salon',
     referencedColumnName: 'pk_salon',
@@ -59,13 +63,16 @@ export class Grupo {
   instructor: Instructor;
 
   @OneToMany(() => Horario, (horario) => horario.grupos)
-  horario: Horario;
- */
+  horario: Horario; */
+
   @OneToMany(() => Clase, (clase) => clase.grupo)
   clases: Clase[];
 
-/*   @ManyToOne(() => TipoGrupo)
-  @JoinColumn({ name: 'FK_TIPO_GRUPO', foreignKeyConstraintName: 'FK_GRUPO_TIPO_GRUPO' })
-  tipoGrupo: TipoGrupo; */
+  @ManyToOne(() => TipoGrupo, (tg) => tg.grupos)
+  @JoinColumn({
+    name: 'FK_TIPO_GRUPO',
+    foreignKeyConstraintName: 'FK_GRUPO_TIPO_GRUPO',
+  })
+  tipoGrupo: TipoGrupo;
 
 }
