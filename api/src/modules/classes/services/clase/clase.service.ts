@@ -16,21 +16,25 @@ export class ClaseService {
    * Devuelve, para un estudiante dado, el nombre del curso,
    * el tipo de grupo y la fecha de finalización del grupo.
    */
-  async listarCursosPorEstudiante(
-    estudianteId: number,
+ // clase.service.ts
+async listarCursosPorDocumento(
+    documentoIdentidad: string,
   ): Promise<ListarCapacitacionesDto[]> {
     return this.claseRepo
       .createQueryBuilder('clase')
-      .innerJoin('clase.grupo', 'grupo')          // FK a GRUPO
-      .innerJoin('grupo.curso', 'curso')         // FK a CURSO
-      .leftJoin('grupo.tipoGrupo', 'tg')         // FK opcional a TIPO_GRUPO
-      .where('clase.pfk_estudiante = :estudianteId', { estudianteId })
+      .innerJoin('clase.grupo', 'grupo')
+      .innerJoin('grupo.curso', 'curso')
+      .leftJoin('grupo.tipoGrupo', 'tg')
+      .innerJoin('clase.estudiante', 'estudiante')
+      .innerJoin('estudiante.usuario', 'usuario')
+      .where('usuario.DOCUMENTO_IDENTIDAD = :documento', { documento: documentoIdentidad })
       .select([
-        'curso.nombre                AS "nombreCurso"',
-        'COALESCE(tg.nombre, grupo.tipo) AS "tipoGrupo"', // usa TIPO_GRUPO o la columna grupo.tipo
-        'grupo.fecha_fin             AS "fechaFin"',
+        'curso.NOMBRE                      AS nombreCurso',
+        'ISNULL(tg.NOMBRE, grupo.TIPO)    AS tipoGrupo',
+        'grupo.FECHA_FIN                  AS fechaFin',
       ])
-      .orderBy('grupo.fecha_fin', 'DESC')        // opcional
-      .getRawMany<ListarCapacitacionesDto>();            // solo los campos seleccionados
+      .orderBy('grupo.FECHA_FIN', 'DESC')
+      .getRawMany<ListarCapacitacionesDto>();
   }
+  
 }

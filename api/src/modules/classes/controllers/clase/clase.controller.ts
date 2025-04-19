@@ -6,34 +6,20 @@ import {
   import { ClaseService } from '../../services/clase/clase.service';
   import { ListarCapacitacionesDto } from '../../dtos/listarCapacitaciones.dto';
   
-  @Controller('clases')            // prefijo de la ruta
+  @Controller('estudiante')            // prefijo de la ruta
   export class ClaseController {
     constructor(private readonly claseService: ClaseService) {}
   
     /**
      * 1.  GET /clases/estudiante/:id
-     *     Devuelve las capacitaciones de cualquier estudiante,
-     *     útil para peticiones administrativas.
+     *     Devuelve las capacitaciones de cualquier estudiante
      */
-    @Get('estudiante/:id')
-    async listarPorEstudiante(
-      @Param('id', ParseIntPipe) id: number,
-    ): Promise<ListarCapacitacionesDto[]> {
-      return this.claseService.listarCursosPorEstudiante(id);
-    }
-  
-    /**
-     * 2.  GET /clases/mias
-     *     Devuelve las capacitaciones del estudiante autenticado.
-     *     Requiere que tu estrategia de autenticación (JWT, sesión, etc.)
-     *     añada `user` al objeto Request.
-     */
-    @Get('mias')
-    async listarPropias(
-      @Req() req: Request,
-    ): Promise<ListarCapacitacionesDto[]> {
-      const estudianteId = (req.user as any).id;     // adapta según tu guard
-      return this.claseService.listarCursosPorEstudiante(estudianteId);
-    }
+    @Get('clases/:documento')
+  async listarPorDocumento(
+    @Param('documento') documento: string,
+  ): Promise<ListarCapacitacionesDto[]> {
+    return this.claseService.listarCursosPorDocumento(documento);
+  }
+
   }
   

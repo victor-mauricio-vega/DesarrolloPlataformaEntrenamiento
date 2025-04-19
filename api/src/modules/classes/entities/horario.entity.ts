@@ -21,11 +21,11 @@ export class Horario {
   @Column({ type: 'time', comment: 'Hora de finalización' })
   hora_fin: Date;
 
-  @ManyToOne(() => Grupo, (grupo) => grupo.horario)
+/*   @ManyToOne(() => Grupo, (grupo) => grupo.horario)
   @JoinColumn({
     name: 'fk_grupo',
     referencedColumnName: 'pk_grupo',
     foreignKeyConstraintName: 'fk_horario_grupo',
   })
-  grupos: Grupo[];
+  grupos: Grupo[]; */
 }

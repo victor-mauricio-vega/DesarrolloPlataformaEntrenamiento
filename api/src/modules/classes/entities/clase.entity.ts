@@ -14,7 +14,6 @@ export class Clase {
   @PrimaryColumn({
     name: 'pfk_grupo',
     primaryKeyConstraintName: 'pk_clase',
-    generated: 'increment',
     foreignKeyConstraintName: 'FK_CLASE_GRUPO',
   })
   pfk_grupo: number;

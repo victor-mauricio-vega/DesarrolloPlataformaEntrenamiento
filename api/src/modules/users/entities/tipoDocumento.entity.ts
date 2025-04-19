@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Pais } from '../../places/entities/pais.entity';
 
 @Entity('TIPO_DOCUMENTO')
 export class TipoDocumento {
-  @PrimaryColumn({ 
+  @PrimaryGeneratedColumn({ 
     name: 'PK_TIPO_DOCUMENTO',
     primaryKeyConstraintName: 'PK_TIPO_DOCUMENTO',})
   pk_tipo_documento: string;
