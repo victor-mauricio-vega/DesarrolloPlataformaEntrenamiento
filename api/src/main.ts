@@ -22,7 +22,7 @@ async function bootstrap() {
   const isProd = configService.get<string>('NODE_ENV') === 'prod';
 const host = isProd
   ? 'https://entrenamientobeta.esri.co/api/'
-  : `http://localhost:${port}/api/`;
+  : `http://localhost:${port}/`;
 
   const config = new DocumentBuilder()
     .setTitle('API Entrenamiento Esri Nosa')
